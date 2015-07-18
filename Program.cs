@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Data.SQLite;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,7 +17,11 @@ namespace ConsoleApplication7
         {
             using (var context = new ChinookContext())
             {
-                context.Database.ExecuteSqlCommand(File.ReadAllText(@"c:\Users\andarno\Documents\Visual Studio 2015\Projects\ConsoleApplication7\Chinook_Sqlite_AutoIncrementPKs.sql"));
+                using (var sr = new StreamReader(Assembly.GetExecutingAssembly().GetManifestResourceStream("ConsoleApplication7.Chinook_Sqlite_AutoIncrementPKs.sql")))
+                {
+                    context.Database.ExecuteSqlCommand(sr.ReadToEnd());
+                }
+
                 var artists = from a in context.Artists
                               where a.Name.StartsWith("A")
                               orderby a.Name
@@ -27,6 +32,11 @@ namespace ConsoleApplication7
                     Console.WriteLine(artist.Name);
                 }
             }
+
+            // I've disposed of the DbContext. All handles to the sqlite database file SHOULD
+            // have been released by now.
+            // Yet, this next line fails because the file is still locked.
+            File.Delete("Chinook_Sqlite_AutoIncrementPKs.sqlite");
         }
     }
 }

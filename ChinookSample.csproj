@@ -78,7 +78,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Chinook_Sqlite_AutoIncrementPKs.sql" />
+    <EmbeddedResource Include="Chinook_Sqlite_AutoIncrementPKs.sql" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\Debug\" />
