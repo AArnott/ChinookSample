@@ -22,14 +22,13 @@ namespace ConsoleApplication7
                     context.Database.ExecuteSqlCommand(sr.ReadToEnd());
                 }
 
-                var artists = from a in context.Artists
-                              where a.Name.StartsWith("A")
-                              orderby a.Name
-                              select a;
+                var entities = from a in context.FileSystemEntities
+                               orderby a.Name
+                               select a;
 
-                foreach (var artist in artists)
+                foreach (var fileSystemEntity in entities)
                 {
-                    Console.WriteLine(artist.Name);
+                    Console.WriteLine(fileSystemEntity.RelativePath);
                 }
             }
 

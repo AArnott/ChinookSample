@@ -11,13 +11,7 @@ namespace ConsoleApplication7
 {
     class ChinookContext : DbContext
     {
-        //public ChinookContext(DbConnection connection)
-        //    : base(connection, true)
-        //{
-        //}
-
-        public DbSet<Artist> Artists { get; set; }
-        public DbSet<Album> Albums { get; set; }
+        public DbSet<FileSystemEntity> FileSystemEntities { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
