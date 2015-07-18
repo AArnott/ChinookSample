@@ -37,6 +37,12 @@ namespace ConsoleApplication7
             // have been released by now.
             // Yet, this next line fails because the file is still locked.
             File.Delete("Chinook_Sqlite_AutoIncrementPKs.sqlite");
+
+            // If I GC and finalize first, it works. This suggests the SQLite ADO.NET
+            // provider does not properly implement the .NET dispose pattern.
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            File.Delete("Chinook_Sqlite_AutoIncrementPKs.sqlite");
         }
     }
 }
