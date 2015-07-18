@@ -15,7 +15,6 @@
         /// Gets or sets the primary key for this entity.
         /// Normally set by the database ORM.
         /// </summary>
-        [Column("Id")]
         public int FileSystemEntityId { get; set; }
 
         /// <summary>
@@ -23,7 +22,6 @@
         /// </summary>
         public string Name { get; set; }
 
-        [Column("Parent_Id")]
         public int? ParentFileSystemEntityId { get; set; }
 
         /// <summary>
